@@ -4,7 +4,7 @@
   <title><![CDATA[xgrommx's blog]]></title>
   <link href="http://xgrommx.github.io/atom.xml" rel="self"/>
   <link href="http://xgrommx.github.io/"/>
-  <updated>2014-02-15T18:52:33+02:00</updated>
+  <updated>2014-02-15T19:02:04+02:00</updated>
   <id>http://xgrommx.github.io/</id>
   <author>
     <name><![CDATA[Денис Стоянов]]></name>
@@ -181,7 +181,7 @@
 </span><span class="line"><span class="nt">&lt;/head&gt;</span>
 </span><span class="line"><span class="nt">&lt;body&gt;</span>
 </span><span class="line">    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;message&quot;</span><span class="nt">&gt;</span>
-</span><span class="line">    <span class="nt">&lt;span&gt;</span><span class="nt">&lt;/span&gt;</span>
+</span><span class="line">    <span class="nt">&lt;span&gt;</span>{{ message }}<span class="nt">&lt;/span&gt;</span>
 </span><span class="line"><span class="nt">&lt;/body&gt;</span>
 </span><span class="line"><span class="nt">&lt;/html&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
