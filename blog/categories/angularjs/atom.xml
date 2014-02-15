@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: AngularJS | My Octopress Blog]]></title>
-  <link href="http://xgrommx.github.io/blog/categories/angularjs/atom.xml" rel="self"/>
-  <link href="http://xgrommx.github.io/"/>
-  <updated>2014-02-15T16:29:24+02:00</updated>
-  <id>http://xgrommx.github.io/</id>
+  <link href="http://xgrommx.io/blog/categories/angularjs/atom.xml" rel="self"/>
+  <link href="http://xgrommx.io/"/>
+  <updated>2014-02-15T16:43:14+02:00</updated>
+  <id>http://xgrommx.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Start With AngularJS]]></title>
-    <link href="http://xgrommx.github.io/blog/2014/02/15/start-with-angularjs/"/>
+    <link href="http://xgrommx.io/blog/2014/02/15/start-with-angularjs/"/>
     <updated>2014-02-15T14:03:47+02:00</updated>
-    <id>http://xgrommx.github.io/blog/2014/02/15/start-with-angularjs</id>
+    <id>http://xgrommx.io/blog/2014/02/15/start-with-angularjs</id>
     <content type="html"><![CDATA[<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Main file start:10 </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

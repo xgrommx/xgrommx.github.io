@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://xgrommx.github.io/sitemap.xml 
+Sitemap: http://xgrommx.io/sitemap.xml 
