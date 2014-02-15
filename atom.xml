@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://xgrommx.io/atom.xml" rel="self"/>
-  <link href="http://xgrommx.io/"/>
-  <updated>2014-02-15T16:53:23+02:00</updated>
-  <id>http://xgrommx.io/</id>
+  <link href="http://xgrommx.com/atom.xml" rel="self"/>
+  <link href="http://xgrommx.com/"/>
+  <updated>2014-02-15T16:56:56+02:00</updated>
+  <id>http://xgrommx.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Start With AngularJS]]></title>
-    <link href="http://xgrommx.io/blog/2014/02/15/start-with-angularjs/"/>
+    <link href="http://xgrommx.com/blog/2014/02/15/start-with-angularjs/"/>
     <updated>2014-02-15T14:03:47+02:00</updated>
-    <id>http://xgrommx.io/blog/2014/02/15/start-with-angularjs</id>
+    <id>http://xgrommx.com/blog/2014/02/15/start-with-angularjs</id>
     <content type="html"><![CDATA[
 
 <figure class='code'><figcaption><span>Main file start:10 </span></figcaption>
