@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Angular | My Octopress Blog]]></title>
+  <link href="http://xgrommx.github.io/blog/categories/angular/atom.xml" rel="self"/>
+  <link href="http://xgrommx.github.io/"/>
+  <updated>2014-02-15T18:43:25+02:00</updated>
+  <id>http://xgrommx.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Введение в AngularJS]]></title>
+    <link href="http://xgrommx.github.io/blog/2014/02/15/angularjs-introduction/"/>
+    <updated>2014-02-15T17:38:28+02:00</updated>
+    <id>http://xgrommx.github.io/blog/2014/02/15/angularjs-introduction</id>
+    <content type="html"><![CDATA[<p>В современно мире программирование существует множество прекрасных и интересный технологий и web также не отстает от новшеств. Javascript уже не тот которого мы знали раньше, он имеет огромную инфраструктуру и давно уже может более чем просто оперировать DOM. По мере того, как стали создаваться сложные RIA, стало намного труднее писать код фронтенда даже используя замечательную библиотеку jQuery.</p>
+
+<p>На помощь пришли многие библиотеки, которые позволяли работать на стороне фронтенда используя довольно известные патерны MVC, MVVM. Из таких фреймворков особо известны: BackboneJS, EmberJS, AngularJS. Также известны такие библиотеки как KnockoutJS, которые позволяют изпользовать декларативный баиндинг. Из всех вышесказанных именно AngularJS является быстроразвивающимся и довольно молодым и модным инструментом. С его помощью можно с легкостью строить прекраснейшие богатые веб приложения, работать с бекендом, создавать анимацию, HTML5 routing и многие другие полезные функции, которые позволят создавать полноценные SPA приложения.</p>
+
+<p>В данной статье мы рассмотрим основные возможности AngularJS, в последствии создадим приложение, которое будет просто сохранять данные локально (возможность использования бекенда мы рассмотрим позже).</p>
+
+<!-- more -->
+
+<p>Первым делом мы идем и скачиваем скрипт. Для этого переходим по адресу <a href="http://www.angularjs.org" target="_blank">angularjs.org</a></p>
+
+<p>Скачавши библиотеку создадим каталог с названием <strong>start-with-angularjs</strong>.
+Создадим файл index.html с таким содержимым</p>
+
+<p>``` html index.html
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;</p>
+<head>
+    <meta charset="UTF-8" />
+    <title>Start with AngularJS</title>
+</head>
+<body>
+    
+</body>
+<p>&lt;/html&gt;
+```</p>
+
+<p>Также создадим новый каталог <strong>js</strong> и положим туда скрипт с AngularJS, который мы только что скачали. Одновременно создадим новый javascript файл с именем <strong>main.js</strong> и изменим наш index.html так</p>
+
+<p>``` html index.html
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;</p>
+<head>
+    <meta charset="UTF-8" />
+    <title>Start with AngularJS</title>
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+<body>
+    
+</body>
+<p>&lt;/html&gt;
+```</p>
+
+<p>Давайте теперь дадим жизнь нашему первому приложению с помощью AngularJS. Для этого добавим в html новый кастомный аттрибут ng-app. Этот аттрибут дает знать AngularJS, что это приложение.</p>
+
+<p>``` html index.html
+&lt;!doctype html&gt;
+&lt;html lang="en" ng-app&gt;</p>
+<head>
+    <meta charset="UTF-8" />
+    <title>Start with AngularJS</title>
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+<body>
+    
+</body>
+<p>&lt;/html&gt;
+```</p>
+
+<p>Следом, добавим новый тег для ввода текста и ниже span.</p>
+
+<p>``` html index.html
+&lt;!doctype html&gt;
+&lt;html lang="en" ng-app&gt;</p>
+<head>
+    <meta charset="UTF-8" />
+    <title>Start with AngularJS</title>
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+<body>
+    <input type="text" />
+    <span></span>
+</body>
+<p>&lt;/html&gt;
+```</p>
+
+<p>Для того чтобы связать наш элемент ввода с AngularJS нам нужно добавить еще один кастомный аттрибут к этому элементу - ng-model. Он дает возможность декларативной связки представления с контроллером, о чем мы поговорим позже.
+Также привяжем нашу модель к span, для того чтобы видеть реальные измения.</p>
+
+<p>``` html index.html
+&lt;!doctype html&gt;
+&lt;html lang="en" ng-app&gt;</p>
+<head>
+    <meta charset="UTF-8" />
+    <title>Start with AngularJS</title>
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+<body>
+    <input type="text" ng-model="message" />
+    <span></span>
+</body>
+<p>&lt;/html&gt;
+```</p>
+
+<p>Двойные фигурные скобки есть особый синтаксис шаблонизатора AngularJS для привязки данных (довольно похоже на HandlebarsJS). Сейчас когда мы откроем наше приложение в браузере и введем что-то в наше поле для ввода, то мы сможем увидеть как сообщение динамически меняется в span.</p>
+
+<p>Вы скажете, какая-то магия творится :)</p>
+
+<p>Но тут особо нет ничего магического, что тут происходит и как мы разберем позже.</p>
+
+<p>До новых встреч.</p>
+]]></content>
+  </entry>
+  
+</feed>
