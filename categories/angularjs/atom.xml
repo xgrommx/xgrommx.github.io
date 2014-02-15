@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Angular | xgrommx's blog]]></title>
-  <link href="http://xgrommx.github.io/blog/categories/angular/atom.xml" rel="self"/>
+  <title><![CDATA[Category: AngularJS | xgrommx's blog]]></title>
+  <link href="http://xgrommx.github.io/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://xgrommx.github.io/"/>
-  <updated>2014-02-15T18:46:43+02:00</updated>
+  <updated>2014-02-15T18:48:58+02:00</updated>
   <id>http://xgrommx.github.io/</id>
   <author>
     <name><![CDATA[Денис Стоянов]]></name>
