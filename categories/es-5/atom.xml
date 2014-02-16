@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Es-5 | xgrommx's blog]]></title>
+  <link href="http://xgrommx.github.io/categories/es-5/atom.xml" rel="self"/>
+  <link href="http://xgrommx.github.io/"/>
+  <updated>2014-02-16T15:07:23+02:00</updated>
+  <id>http://xgrommx.github.io/</id>
+  <author>
+    <name><![CDATA[Денис Стоянов]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Манипуляции с массивами]]></title>
+    <link href="http://xgrommx.github.io/blog/2014/02/16/manipulation-with-array/"/>
+    <updated>2014-02-16T13:53:32+02:00</updated>
+    <id>http://xgrommx.github.io/blog/2014/02/16/manipulation-with-array</id>
+    <content type="html"><![CDATA[<p>Довольно часто нам приходится фильтровать, изменять или приводить все элементы к единому скалярному значению. Иногда это является довольно рутинной задачей и делает некоторые сложности. На помощь нам может прийти три основных понятия функционального программирования, на котором оно основано.</p>
+
+<p>Допустим у нас есть массив с юзерами у которых есть имя, фамилия, возраст, пол и размер оклада заработной платы. Припустим, что нам надо получить только лишь имена.</p>
+
+<!-- more -->
+
+<p>С помощью обычного императивного подхода это будет выглядить так:</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var names = [];</p>
+
+<p>users.forEach(function(el, i, a) {
+    names.push(el.firstName);
+});</p>
+
+<p>console.log(names); // =&gt; [“Алексей”, “Петр”, “Марина”, “Ольга”, “Игорь”] </p>
+
+<p>```</p>
+
+<p>Чтоже выглядит довольно не плохо, но есть одно но. Почему бы сразу из текущего массива не получить новый, путем его проекции? На помощь к нам приходит метод <code>map</code>. Он служит своего рода как функция-проектор, которая в зависимости от колбека создает новую проекцию текущего массива. Давайте перепишем наш код:</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var names = users.map(function(el) {
+    return el.firstName;
+});</p>
+
+<p>console.log(names); // =&gt; [“Алексей”, “Петр”, “Марина”, “Ольга”, “Игорь”]</p>
+
+<p>```</p>
+
+<p>Как можно заметить, что функция-проектор, которая используется как колбек у <code>map</code> применится к каждому из элементов этого массива и вернет новый массив с изменнеными значениями. Это можно увидеть на этой диаграмме:</p>
+
+<p><img src="https://github.com/Netflix/RxJava/wiki/images/rx-operators/map.png" alt="Array map" /></p>
+
+<p>Довольно не плохо, скажете вы, но что делать если мы хотим получить только мужчин или же только тех у кого присутствует буква “A”. Как и раньше давайте снова напишем в старом и стиле и проверим как это будет работать.</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var onlyMale = [];</p>
+
+<p>users.forEach(function(el, i, a) {
+    if(el.sex === ‘male’) {
+        onlyMale.push(el);
+    }
+});</p>
+
+<p>console.log(onlyMale); // =&gt; [Object, Object, Object]</p>
+
+<p>```</p>
+
+<p>Чтоже наша сильная половина человечества отфильтрована. Но как и с случаем с <code>map</code> мы бы хотели просто получить новый массив, не проводя никаких итераций. И тут нам на помощь приходит функция <code>filter</code> у которой есть специализированный колбек - предикат. Предикат - это функция, коротая возвращет всего два значения (<code>true</code> или <code>false</code>) тоесть булевые значения.</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var onlyMale = users.filter(function(el) {
+    return el.sex === ‘male’;
+});</p>
+
+<p>console.log(onlyMale);</p>
+
+<p>```</p>
+
+<p>Сдесь также функция колбек(предикат) применится к каждому элементу массива, но в отличии от <code>map</code>, колличество возвращенных элементов не будет равно колличеству елементов исходного массива. Это происходит потому, что наша функция отбросила все элементы, что не подходили условию. Это также можно увидеть на этой диаграмме.</p>
+
+<p><img src="https://github.com/Netflix/RxJava/wiki/images/rx-operators/filter.png" alt="Array filter" /></p>
+
+<p>Но вдруг возникла задача, что нам нужно привести все элементы массива к одному скалярному значению, например посчитать зарплату всех юзеров. Для этого нам прийдется пройтись по всем элементам массива и агрегировать зарплату всех в одну переменную применяя операцию сложения.</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var totalSalary = 0;</p>
+
+<p>users.forEach(function(el, i, a) {
+    totalSalary += parseInt(el.salary);
+});</p>
+
+<p>console.log(“Total salary = %d”, totalSalary); // =&gt; Total salary = 61000</p>
+
+<p>```</p>
+
+<p>Довольно часто приходится менять оператор для агрегации, например использовать умножение или еще какие-то либо другие операторы. Для того чтобы это было довольно просто в арсенале <code>javascript</code> имеется еще один метод - <code>reduce</code>. У него также есть метод колбек, но он принимает в себя два параметра - первый это предидущее значение, а второй текущее. Первый параметр также выступает в роли аккумулятора, который накапливает значения. Теперь наш пример будет выглядить так:</p>
+
+<p>``` js</p>
+
+<p>var users = [
+    {firstName: ‘Алексей’, lastName: ‘Алексеев’, age: 25, sex: ‘male’, salary: 10000},
+    {firstName: ‘Петр’, lastName: ‘Петров’, age: 30, sex: ‘male’, salary: 18000},
+    {firstName: ‘Марина’, lastName: ‘Алексеевна’, age: 26, sex: ‘female’, salary: 8000},
+    {firstName: ‘Ольга’, lastName: ‘Петровна’, age: 45, sex: ‘female’, salary: 19000},
+    {firstName: ‘Игорь’, lastName: ‘Васильев’, age: 22, sex: ‘male’, salary: 6000}
+];</p>
+
+<p>var totalSalary = users.map(function(el) { return el.salary; })
+                       .reduce(function(a, b) { return a + b; });</p>
+
+<p>console.log(“Total salary = %d”, totalSalary);</p>
+
+<p>```</p>
+
+<p>Как вы заметили, мы также использовали функцию <code>map</code> для того чтобы превратить наш массив в линейный, состоящий только лишь из зарплатной состовляющей. Теперь довольно просто поменять аккумулирующую функцию, на любой оператор, который нам подходит. Также мы можем это увидеть на диаграмме:</p>
+
+<p><img src="https://github.com/Netflix/RxJava/wiki/images/rx-operators/scan.png" alt="Array reduce" /></p>
+
+<p>Scan и reduce являются синонимами.</p>
+
+<p>Но не все так радужно по поводу этого. Так как выше приведенные функции являются стандартами ecmascript 5, то есть ряд браузеров которые ще это не поддерживают. Особенно это касается Internet Explorer 7,8. Для того чтобы исправить эту проблему существуют своего рода ‘заплатки’ - полифилы. Если мы хотим использовать эти функции везде, то стоит подключить этот скрипт <a href="https://github.com/es-shims/es5-shim" target="_blank">es-5 shim</a>.</p>
+
+<p>Из этих функций, также есть обертки типа <code>sum</code>, <code>every</code>, <code>some</code> - но они являются лишь производными от основных, так сказать упрощают написание кода в часто используемых моментах.</p>
+
+<p>Вы также можете проверить ваш браузер на поддержку тех или иных фич, перейдя по <a href="http://kangax.github.io/es5-compat-table" target="_blank">ссылке</a>
+А на сегодня все, до новых встреч :)</p>
+
+<p>PS: Диаграммы, приведенные в данной статье честно заимствованы с <a href="https://github.com/Netflix/RxJava/wiki" target="_blank">wiki</a></p>
+]]></content>
+  </entry>
+  
+</feed>
